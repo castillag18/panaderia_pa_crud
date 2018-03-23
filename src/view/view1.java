@@ -405,7 +405,7 @@ public class view1 extends javax.swing.JFrame {
     private void btnGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModActionPerformed
         int OpcGuardPan = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los cambios?");
         if (OpcGuardPan == 0) {
-            panemco.update(num,new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
+            panemco.update(num, new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
             EditPanMod(false);
             chbSelecMod.setSelected(false);
             borrarTxtField();
@@ -421,7 +421,7 @@ public class view1 extends javax.swing.JFrame {
 
     private void panad_reg_tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panad_reg_tbl1MouseClicked
         num = panad_reg_tbl1.getSelectedRow();
-        
+
         btnEditarMod.setEnabled(true);
         btnEliminarMod.setEnabled(true);
         chbSelecMod.setSelected(true);
@@ -429,17 +429,26 @@ public class view1 extends javax.swing.JFrame {
 
     private void btnEditarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarModActionPerformed
         int OpcEditPan = JOptionPane.showConfirmDialog(null, "¿Desea Modificar la Panaderia?");
-
-        if (OpcEditPan == 0) {
-            EditPanMod(true);
+        try {
+            if (OpcEditPan == 0) {
+                EditPanMod(true);
+                btnEditarMod.setEnabled(false);
+                DatosTxtField();
+            } else {
+                EditPanMod(false);
+                btnEditarMod.setEnabled(false);
+                chbSelecMod.setSelected(false);
+                borrarTxtField();
+            }
+        } catch (Exception e) {
             btnEditarMod.setEnabled(false);
-            DatosTxtField();
-        }else {
-            EditPanMod(false);
-            btnEditarMod.setEnabled(false);
+            btnCancelarMod.setEnabled(false);
+            btnGuardarMod.setEnabled(false);
             chbSelecMod.setSelected(false);
-            borrarTxtField();
+            EditPanMod(false);
+            JOptionPane.showMessageDialog(null, "No existe panaderia para editar");
         }
+
     }//GEN-LAST:event_btnEditarModActionPerformed
 
     private void btnCancelarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarModActionPerformed
@@ -451,16 +460,24 @@ public class view1 extends javax.swing.JFrame {
 
     private void btnEliminarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarModActionPerformed
         int OpcElmPan = JOptionPane.showConfirmDialog(null, "¿Desea ElIMINAR la Panaderia?");
-        
-        if (OpcElmPan == 0) {
-            panemco.delete(num, panad_reg_tbl1, panad_reg_tbl);
-            EditPanMod(false);
+        try {
+            if (OpcElmPan == 0) {
+                panemco.delete(num, panad_reg_tbl1, panad_reg_tbl);
+                EditPanMod(false);
+                btnEditarMod.setEnabled(false);
+                chbSelecMod.setSelected(false);
+            } else {
+                EditPanMod(false);
+                btnEditarMod.setEnabled(false);
+                chbSelecMod.setSelected(false);
+            }
+        } catch (Exception e) {
             btnEditarMod.setEnabled(false);
-        }else {
-            EditPanMod(false);
-            btnEditarMod.setEnabled(false);
+            btnEliminarMod.setEnabled(false);
             chbSelecMod.setSelected(false);
-        }  
+            JOptionPane.showMessageDialog(null, "No existe panaderia para eliminar");
+        }
+
     }//GEN-LAST:event_btnEliminarModActionPerformed
 
     private void chbSelecModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbSelecModActionPerformed
@@ -468,7 +485,7 @@ public class view1 extends javax.swing.JFrame {
             EditPanMod(false);
             btnEditarMod.setEnabled(false);
             borrarTxtField();
-        }else if (chbSelecMod.isSelected() == true) {
+        } else if (chbSelecMod.isSelected() == true) {
             btnEditarMod.setEnabled(true);
             btnEliminarMod.setEnabled(true);
         }
@@ -485,8 +502,8 @@ public class view1 extends javax.swing.JFrame {
         txtNombreMod.setEnabled(V);
         txtDirecMod.setEnabled(V);
     }
-    
-    public void borrarTxtField(){
+
+    public void borrarTxtField() {
         String t = "";
         txtContaReg.setText(t);
         txtContacMod.setText(t);
@@ -501,8 +518,8 @@ public class view1 extends javax.swing.JFrame {
         txtNommbUsuMod.setText(t);
         txtNomreUsua.setText(t);
     }
-    
-    public void DatosTxtField(){
+
+    public void DatosTxtField() {
         txtContacMod.setText(panemco.read(num).getContacto());
         txtContraUsuMod.setText(panemco.read(num).getPass_usuario());
         txtDirecMod.setText(panemco.read(num).getDireccion());
@@ -510,8 +527,8 @@ public class view1 extends javax.swing.JFrame {
         txtNombreMod.setText(panemco.read(num).getNombre());
         txtNommbUsuMod.setText(panemco.read(num).getNom_usuario());
     }
-            
-    public void listarTabla(){
+
+    public void listarTabla() {
         panemco.admintabla(panad_reg_tbl);
         panemco.admintabla(panad_reg_tbl1);
     }
