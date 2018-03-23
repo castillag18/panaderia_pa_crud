@@ -13,9 +13,10 @@ public class panaderiaController {
         lista_panaderia.add(p1);
     }
 
-    public void update(int index, panaderia p1, javax.swing.JTable panad_reg_tbl) {
+    public void update(int index, panaderia p1, javax.swing.JTable panad_reg_tbl, javax.swing.JTable panad_reg_tbl1) {
         lista_panaderia.set(index, p1);
         admintabla(panad_reg_tbl);
+        admintabla(panad_reg_tbl1);
     }
 
     public panaderia read(int index) {
@@ -23,9 +24,10 @@ public class panaderiaController {
 
     }
 
-    public void delete(int index, javax.swing.JTable panad_reg_tbl) {
+    public void delete(int index, javax.swing.JTable panad_reg_tbl, javax.swing.JTable panad_reg_tbl1) {
         lista_panaderia.remove(index);
         admintabla(panad_reg_tbl);
+        admintabla(panad_reg_tbl1);
     }
 
     public ArrayList<panaderia> getLista_panaderia() {

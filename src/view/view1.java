@@ -405,7 +405,7 @@ public class view1 extends javax.swing.JFrame {
     private void btnGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModActionPerformed
         int OpcGuardPan = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los cambios?");
         if (OpcGuardPan == 0) {
-            panemco.update(num,new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1);
+            panemco.update(num,new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
             EditPanMod(false);
             chbSelecMod.setSelected(false);
         }
@@ -414,8 +414,7 @@ public class view1 extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
-        panemco.admintabla(panad_reg_tbl);
-        panemco.admintabla(panad_reg_tbl1);
+        listarTabla();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void panad_reg_tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panad_reg_tbl1MouseClicked
@@ -432,6 +431,10 @@ public class view1 extends javax.swing.JFrame {
         if (OpcEditPan == 0) {
             EditPanMod(true);
             btnEditarMod.setEnabled(false);
+        }else {
+            EditPanMod(false);
+            btnEditarMod.setEnabled(false);
+            chbSelecMod.setSelected(false);
         }
     }//GEN-LAST:event_btnEditarModActionPerformed
 
@@ -445,7 +448,13 @@ public class view1 extends javax.swing.JFrame {
         int OpcElmPan = JOptionPane.showConfirmDialog(null, "¿Desea ElIMINAR la Panaderia?");
         
         if (OpcElmPan == 0) {
-            panemco.delete(num, panad_reg_tbl1);
+            panemco.delete(num, panad_reg_tbl1, panad_reg_tbl);
+            EditPanMod(false);
+            btnEditarMod.setEnabled(false);
+        }else {
+            EditPanMod(false);
+            btnEditarMod.setEnabled(false);
+            chbSelecMod.setSelected(false);
         }  
     }//GEN-LAST:event_btnEliminarModActionPerformed
 
@@ -453,6 +462,9 @@ public class view1 extends javax.swing.JFrame {
         if (chbSelecMod.isSelected() == false) {
             EditPanMod(false);
             btnEditarMod.setEnabled(false);
+        }else if (chbSelecMod.isSelected() == true) {
+            btnEditarMod.setEnabled(true);
+            btnEliminarMod.setEnabled(true);
         }
     }//GEN-LAST:event_chbSelecModActionPerformed
 
@@ -466,6 +478,11 @@ public class view1 extends javax.swing.JFrame {
         txtNitMod.setEnabled(V);
         txtNombreMod.setEnabled(V);
         txtDirecMod.setEnabled(V);
+    }
+    
+    public void listarTabla(){
+        panemco.admintabla(panad_reg_tbl);
+        panemco.admintabla(panad_reg_tbl1);
     }
 
     /**
