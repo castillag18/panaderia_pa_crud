@@ -107,18 +107,6 @@ public class view1 extends javax.swing.JFrame {
 
         jLabel2.setText("NIT");
 
-        txtDirecReg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDirecRegActionPerformed(evt);
-            }
-        });
-
-        txtContraUsu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraUsuActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Direccion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -414,11 +402,13 @@ public class view1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtContraUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraUsuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraUsuActionPerformed
-
     private void btnGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModActionPerformed
+        int OpcGuardPan = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los cambios?");
+        if (OpcGuardPan == 0) {
+            panemco.update(num,new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1);
+            EditPanMod(false);
+            chbSelecMod.setSelected(false);
+        }
 
     }//GEN-LAST:event_btnGuardarModActionPerformed
 
@@ -427,10 +417,6 @@ public class view1 extends javax.swing.JFrame {
         panemco.admintabla(panad_reg_tbl);
         panemco.admintabla(panad_reg_tbl1);
     }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void txtDirecRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecRegActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDirecRegActionPerformed
 
     private void panad_reg_tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panad_reg_tbl1MouseClicked
         num = panad_reg_tbl1.getSelectedRow();

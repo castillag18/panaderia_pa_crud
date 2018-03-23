@@ -260,14 +260,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDirecReg">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDirecRegActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtContraUsu">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtContraUsuActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>

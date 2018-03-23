@@ -13,8 +13,9 @@ public class panaderiaController {
         lista_panaderia.add(p1);
     }
 
-    public void update(int index, panaderia p1) {
+    public void update(int index, panaderia p1, javax.swing.JTable panad_reg_tbl) {
         lista_panaderia.set(index, p1);
+        admintabla(panad_reg_tbl);
     }
 
     public panaderia read(int index) {
