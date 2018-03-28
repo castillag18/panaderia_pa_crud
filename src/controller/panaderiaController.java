@@ -23,6 +23,15 @@ public class panaderiaController {
         return lista_panaderia.get(index);
 
     }
+    public ArrayList<panaderia> Read(String Filter) {
+        ArrayList<panaderia> Get = new ArrayList<>();
+        for (panaderia pan : lista_panaderia) {
+            if (pan.getNit().contains(Filter)) {
+                Get.add(pan);
+            }
+        }
+        return Get;
+    }
 
     public void delete(int index, javax.swing.JTable panad_reg_tbl, javax.swing.JTable panad_reg_tbl1) {
         lista_panaderia.remove(index);
