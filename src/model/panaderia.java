@@ -16,8 +16,8 @@ public class panaderia {
     private String pass_usuario;
 
     public panaderia(String nombre, String direccion, String nit, String contacto, String nom_usuario, String pass_usuario) {
-        this.nombre = nombre;
-        this.direccion = direccion;
+        this.nombre = nombre.toUpperCase();
+        this.direccion = direccion.toUpperCase();
         this.nit = nit;
         this.contacto = contacto;
         this.nom_usuario = nom_usuario;
