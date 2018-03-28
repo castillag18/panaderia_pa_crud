@@ -60,7 +60,6 @@ public class view1 extends javax.swing.JFrame {
         panad_reg_tbl1 = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         txtBuscarNit = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -293,8 +292,11 @@ public class view1 extends javax.swing.JFrame {
         }
 
         btnBuscar.setText("Buscar");
-
-        jLabel13.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -316,8 +318,7 @@ public class view1 extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
                             .addComponent(txtContraUsuMod)
-                            .addComponent(txtNommbUsuMod, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                            .addComponent(jLabel13))
+                            .addComponent(txtNommbUsuMod, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -372,15 +373,9 @@ public class view1 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtContraUsuMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(chbSelecMod)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGap(13, 13, 13)
+                .addComponent(chbSelecMod)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(txtBuscarNit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -512,6 +507,11 @@ public class view1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chbSelecModActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        panemco.Read(txtBuscarNit.getText());
+        panemco.admintabla(panad_reg_tbl1,panemco.Read(txtBuscarNit.getText()));
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     public void EditPanMod(boolean V) {
         btnGuardarMod.setEnabled(V);
         btnCancelarMod.setEnabled(V);
@@ -550,8 +550,8 @@ public class view1 extends javax.swing.JFrame {
     }
 
     public void listarTabla() {
-        panemco.admintabla(panad_reg_tbl);
-        panemco.admintabla(panad_reg_tbl1);
+        panemco.admintabla(panad_reg_tbl,panemco.getLista_panaderia());
+        panemco.admintabla(panad_reg_tbl1,panemco.getLista_panaderia());
     }
 
     /**
@@ -601,7 +601,6 @@ public class view1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
