@@ -424,26 +424,26 @@ public class view1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModActionPerformed
-        int OpcGuardPan = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los cambios?");
-        if (OpcGuardPan == 0) {
-            panemco.update(num, new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
-            EditPanMod(false);
-            chbSelecMod.setSelected(false);
-            borrarTxtField();
+        if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
+            int OpcGuardPan = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los cambios?");
+            if (OpcGuardPan == 0) {
+                panemco.update(num, new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
+                EditPanMod(false);
+                chbSelecMod.setSelected(false);
+                borrarTxtField();
+            }
+
         }
+
 
     }//GEN-LAST:event_btnGuardarModActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText())){
-        panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
-        listarTabla(); 
-       }
-        
-        
-       
-        
-        borrarTxtField();
+        if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText())) {
+            panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
+            listarTabla();
+            borrarTxtField();
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void panad_reg_tbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panad_reg_tbl1MouseClicked
@@ -520,7 +520,7 @@ public class view1 extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         panemco.Read(txtBuscarNit.getText());
-        panemco.admintabla(panad_reg_tbl1,panemco.Read(txtBuscarNit.getText()));
+        panemco.admintabla(panad_reg_tbl1, panemco.Read(txtBuscarNit.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     public void EditPanMod(boolean V) {
@@ -534,14 +534,14 @@ public class view1 extends javax.swing.JFrame {
         txtNombreMod.setEnabled(V);
         txtDirecMod.setEnabled(V);
     }
-    
-    private Boolean Val_Panaderia(String nombre, String direccion, String nit, String contacto, String nom_usuario, String pass_usuario){
-       boolean V = true;
-       //cindicion para saber si la entrada esta o no vacia
+
+    private Boolean Val_Panaderia(String nombre, String direccion, String nit, String contacto, String nom_usuario, String pass_usuario) {
+        boolean V = true;
+        //cindicion para saber si la entrada esta o no vacia
         try {
             if (nombre == null || nombre.equals("") || direccion == null || direccion.equals("") || nit == null || nit.equals("") || contacto == null || contacto.equals("") || nom_usuario == null || nom_usuario.equals("") || pass_usuario == null || pass_usuario.equals("")) {
-             JOptionPane.showMessageDialog(null, "Ha dejado campos vacios", "ERROR", 0);
-                V = false;   
+                JOptionPane.showMessageDialog(null, "Ha dejado campos vacios", "ERROR", 0);
+                V = false;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Digite solo valores númericos", "ERROR", 0);
@@ -576,8 +576,8 @@ public class view1 extends javax.swing.JFrame {
     }
 
     public void listarTabla() {
-        panemco.admintabla(panad_reg_tbl,panemco.getLista_panaderia());
-        panemco.admintabla(panad_reg_tbl1,panemco.getLista_panaderia());
+        panemco.admintabla(panad_reg_tbl, panemco.getLista_panaderia());
+        panemco.admintabla(panad_reg_tbl1, panemco.getLista_panaderia());
     }
 
     /**
