@@ -427,22 +427,35 @@ public class view1 extends javax.swing.JFrame {
         if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
             int OpcGuardPan = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los cambios?");
             if (OpcGuardPan == 0) {
-                panemco.update(num, new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
-                EditPanMod(false);
-                chbSelecMod.setSelected(false);
-                borrarTxtField();
+                if (txtNitMod.getText().length() > 10 || txtNitMod.getText().length() < 10) {
+                    JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitMod.getText().length() + " digitos.", "ERROR", 0);
+                } else if (Integer.parseInt(txtNitMod.getText()) <= 0) {
+                    JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
+                } else if (txtNitMod.getText().length() == 10 && Integer.parseInt(txtNitMod.getText()) >= 0) {
+                    if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
+                        panemco.update(num, new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
+                        EditPanMod(false);
+                        chbSelecMod.setSelected(false);
+                        borrarTxtField();
+                    }
+                }
             }
-
         }
-
-
     }//GEN-LAST:event_btnGuardarModActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText())) {
-            panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
-            listarTabla();
-            borrarTxtField();
+        if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNombreReg.getText(), txtContraUsu.getText())) {
+            if (txtNitReg.getText().length() > 10 || txtNitReg.getText().length() < 10) {
+                JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitReg.getText().length() + " digitos.", "ERROR", 0);
+            } else if (Integer.parseInt(txtNitReg.getText()) <= 0) {
+                JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
+            } else if (txtNitReg.getText().length() == 10 && Integer.parseInt(txtNitReg.getText()) >= 0) {
+                if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText())) {
+                    panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
+                    listarTabla();
+                    borrarTxtField();
+                }
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -537,7 +550,7 @@ public class view1 extends javax.swing.JFrame {
 
     private Boolean Val_Panaderia(String nombre, String direccion, String nit, String contacto, String nom_usuario, String pass_usuario) {
         boolean V = true;
-        //cindicion para saber si la entrada esta o no vacia
+        //condicion para saber si la entrada esta o no vacia
         try {
             if (nombre == null || nombre.equals("") || direccion == null || direccion.equals("") || nit == null || nit.equals("") || contacto == null || contacto.equals("") || nom_usuario == null || nom_usuario.equals("") || pass_usuario == null || pass_usuario.equals("")) {
                 JOptionPane.showMessageDialog(null, "Ha dejado campos vacios", "ERROR", 0);
