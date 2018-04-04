@@ -3,11 +3,14 @@ package view;
 import model.panaderia;
 import controller.panaderiaController;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 
-public class view1 extends javax.swing.JFrame {
+public class View1 extends javax.swing.JFrame {
 
-    public view1() {
+    public View1() {
         initComponents();
         setLocationRelativeTo(null);
         panemco.getLista_panaderia();
@@ -610,28 +613,30 @@ public class view1 extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        String s = "de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel";
+
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            javax.swing.UIManager.setLookAndFeel(s);
+
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(view1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(View1.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(view1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(View1.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(view1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(view1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(View1.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new view1().setVisible(true);
+                new View1().setVisible(true);
             }
         });
     }
