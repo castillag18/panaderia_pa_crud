@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package model;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class panaderia {
+public class panaderia implements Serializable{
     
     private String nombre;
     private String direccion;

@@ -2,6 +2,12 @@ package view;
 
 import model.panaderia;
 import controller.panaderiaController;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +20,9 @@ public class View1 extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         panemco.getLista_panaderia();
-        
+        IconosPanel();
+        cargar_datos();
+        listarTabla();
     }
     panaderiaController panemco = new panaderiaController();
     int num;
@@ -23,7 +31,7 @@ public class View1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        Panel_General = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -200,7 +208,7 @@ public class View1 extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Registrar", jPanel1);
+        Panel_General.addTab("Registrar", jPanel1);
 
         jLabel7.setText("Nombre");
 
@@ -420,23 +428,37 @@ public class View1 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Modificar", jPanel2);
+        Panel_General.addTab("Modificar", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
+                .addComponent(Panel_General)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Panel_General, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void IconosPanel() {//ICONOS 
+
+        // Titulo + Icono del programa
+        setTitle("Panapa 2.0.0");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Icons/bread.png")));
+
+        //Productos
+        Panel_General.setIconAt(0, new javax.swing.ImageIcon(getClass().getResource("/Icons/groceries.png")));
+        //Proveedores
+        Panel_General.setIconAt(1, new javax.swing.ImageIcon(getClass().getResource("/Icons/packing.png")));
+
+    }
+
 
     private void btnGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModActionPerformed
         if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
@@ -444,12 +466,14 @@ public class View1 extends javax.swing.JFrame {
             if (OpcGuardPan == 0) {
                 if (txtNitMod.getText().length() > 10 || txtNitMod.getText().length() < 10) {
                     JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitMod.getText().length() + " digitos.", "ERROR", 0);
-                } else if (Integer.parseInt(txtNitMod.getText()) <= 0) {
-                    JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
-                } else if (txtNitMod.getText().length() == 10 && Integer.parseInt(txtNitMod.getText()) >= 0) {
+//            } else if (Integer.parseInt(txtNitReg.getText()) <= 0) {
+//                JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
+                    //hay que validar que los caracteres sean solo numeros
+                } else if (txtNitReg.getText().length() == 10 /*&& Integer.parseInt(txtNitReg.getText()) >= 0*/) {
                     if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
                         panemco.update(num, new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
                         EditPanMod(false);
+                        salvar_datos();
                         chbSelecMod.setSelected(false);
                         borrarTxtField();
                     }
@@ -469,6 +493,7 @@ public class View1 extends javax.swing.JFrame {
                 if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText())) {
                     panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
                     listarTabla();
+                    salvar_datos();
                     borrarTxtField();
                 }
             }
@@ -617,6 +642,32 @@ public class View1 extends javax.swing.JFrame {
         panemco.admintabla(panad_reg_tbl, panemco.getLista_panaderia());
         panemco.admintabla(panad_reg_tbl1, panemco.getLista_panaderia());
     }
+    String nameFile = "panaderias_lista1.dat";
+
+    public void cargar_datos() {
+        File fichero = new File(nameFile);
+
+        if (fichero.exists()) {
+            try {
+                FileInputStream archivo = new FileInputStream(nameFile);
+                ObjectInputStream obj_archivo = new ObjectInputStream(archivo);
+                panemco.setLista_panaderia((ArrayList<panaderia>) obj_archivo.readObject());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error con el archivo");
+            }
+        }
+
+    }
+
+    public void salvar_datos() {
+        try {
+            FileOutputStream archivo = new FileOutputStream(nameFile);
+            ObjectOutputStream obj_archivo = new ObjectOutputStream(archivo);
+            obj_archivo.writeObject(panemco.getLista_panaderia());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error con el archivo");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -656,6 +707,7 @@ public class View1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane Panel_General;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelarMod;
     private javax.swing.JButton btnEditarMod;
@@ -681,7 +733,6 @@ public class View1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable panad_reg_tbl;
     private javax.swing.JTable panad_reg_tbl1;
     private javax.swing.JTextField txtBuscarNit;

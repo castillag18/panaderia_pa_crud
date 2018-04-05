@@ -58,8 +58,7 @@ public class panaderiaController {
             matriz[i][4] = panco.get(i).getNom_usuario();
             matriz[i][5] = panco.get(i).getPass_usuario();
 
-        }
-        
+        }       
         
         panad_reg_tbl.setModel(new javax.swing.table.DefaultTableModel(
                 matriz,
@@ -74,9 +73,7 @@ public class panaderiaController {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
-        });
-
-        
+        });        
 
         if (panad_reg_tbl.getColumnModel().getColumnCount() > 0) {
             panad_reg_tbl.getColumnModel().getColumn(0).setResizable(false);
