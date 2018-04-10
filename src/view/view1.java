@@ -11,7 +11,7 @@ public class view1 extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         panemco.getLista_panaderia();
-        
+
     }
     panaderiaController panemco = new panaderiaController();
     int num;
@@ -108,6 +108,12 @@ public class view1 extends javax.swing.JFrame {
         }
 
         jLabel1.setText("Nombre");
+
+        txtNitReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNitRegActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("NIT");
 
@@ -217,6 +223,11 @@ public class view1 extends javax.swing.JFrame {
         jLabel9.setText("Direccion");
 
         txtNitMod.setEnabled(false);
+        txtNitMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNitModActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("NIT");
 
@@ -238,6 +249,11 @@ public class view1 extends javax.swing.JFrame {
 
         chbSelecMod.setText("Seleccionado");
         chbSelecMod.setEnabled(false);
+        chbSelecMod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chbSelecModMouseClicked(evt);
+            }
+        });
         chbSelecMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chbSelecModActionPerformed(evt);
@@ -302,6 +318,12 @@ public class view1 extends javax.swing.JFrame {
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
+            }
+        });
+
+        txtBuscarNit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarNitActionPerformed(evt);
             }
         });
 
@@ -452,16 +474,21 @@ public class view1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarModActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
         if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNombreReg.getText(), txtContraUsu.getText())) {
             if (txtNitReg.getText().length() > 10 || txtNitReg.getText().length() < 10) {
                 JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitReg.getText().length() + " digitos.", "ERROR", 0);
+                
             } else if (Integer.parseInt(txtNitReg.getText()) <= 0) {
                 JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
+                
             } else if (txtNitReg.getText().length() == 10 && Integer.parseInt(txtNitReg.getText()) >= 0) {
+                Val_Nit(txtNitReg.getText());
                 if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText())) {
                     panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
                     listarTabla();
                     borrarTxtField();
+                    
                 }
             }
         }
@@ -544,6 +571,22 @@ public class view1 extends javax.swing.JFrame {
         panemco.admintabla(panad_reg_tbl1, panemco.Read(txtBuscarNit.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void chbSelecModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chbSelecModMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbSelecModMouseClicked
+
+    private void txtBuscarNitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarNitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarNitActionPerformed
+
+    private void txtNitModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNitModActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNitModActionPerformed
+
+    private void txtNitRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNitRegActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNitRegActionPerformed
+
     public void EditPanMod(boolean V) {
         btnGuardarMod.setEnabled(V);
         btnCancelarMod.setEnabled(V);
@@ -569,6 +612,19 @@ public class view1 extends javax.swing.JFrame {
             V = false;
         }
         return V;
+    }
+
+    public Boolean Val_Nit(String nit) {
+        boolean valid = true;
+        for (int i = 0; i < panemco.getLista_panaderia().size(); i++) {
+            if (nit.equals(panemco.getLista_panaderia().get(i).getNit())) {
+                valid = false;
+                break;
+                
+            }
+
+        }
+        return valid;
     }
 
     public void borrarTxtField() {
