@@ -94,6 +94,12 @@ public class View1 extends javax.swing.JFrame {
 
         jLabel5.setText("Nombre-Usuario");
 
+        txtNomreUsua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomreUsuaKeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("Contraseña-Usuario");
 
         panad_reg_tbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -517,9 +523,9 @@ public class View1 extends javax.swing.JFrame {
             if (txtNitReg.getText().length() > 10 || txtNitReg.getText().length() < 10) {
                 JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitReg.getText().length() + " digitos.", "ERROR", 0);
 
-            } else if (txtNitReg.getText().length() == 10) {
+            } else {
 
-                if (Val_Nit(txtNitReg.getText())) {
+                if (Val_Nit(txtNitReg.getText()) && Val_user(txtNomreUsua.getText())) {
                     panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
                     listarTabla();
                     salvar_datos();
@@ -658,6 +664,14 @@ public class View1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNitRegKeyTyped
 
+    private void txtNomreUsuaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomreUsuaKeyTyped
+
+        if (!Character.isLetterOrDigit(evt.getKeyChar())) {
+            evt.consume();
+        } 
+
+    }//GEN-LAST:event_txtNomreUsuaKeyTyped
+
     public void EditPanMod(boolean V) {
         btnGuardarMod.setEnabled(V);
         btnCancelarMod.setEnabled(V);
@@ -693,11 +707,11 @@ public class View1 extends javax.swing.JFrame {
             if (!Character.isDigit(nit.charAt(i))) {
                 valid1 = false;
                 valid = false;
-                JOptionPane.showMessageDialog(null, "Caracter no valido: "+nit.charAt(i));                
+                JOptionPane.showMessageDialog(null, "Caracter no valido: " + nit.charAt(i));
                 break;
             }
         }
-        if (valid1) {            
+        if (valid1) {
             for (int i = 0; i < panemco.getLista_panaderia().size(); i++) {
                 if (nit.equals(panemco.getLista_panaderia().get(i).getNit())) {
                     valid = false;
@@ -707,6 +721,30 @@ public class View1 extends javax.swing.JFrame {
             }
         }
         return valid;
+    }
+
+    public boolean Val_user(String nombreuser) {
+        boolean valid = true;
+        boolean valid1 = true;
+        for (int i = 0; i < nombreuser.length(); i++) {
+            if (!Character.isLetterOrDigit(nombreuser.charAt(i))) {
+                valid1 = false;
+                valid = false;
+                JOptionPane.showMessageDialog(null, "Caracter no valido: " + nombreuser.charAt(i));
+                break;
+            }
+        }
+        if (valid1) {
+            for (int i = 0; i < panemco.getLista_panaderia().size(); i++) {
+                if (nombreuser.equals(panemco.getLista_panaderia().get(i).getNom_usuario())) {
+                   valid = false; 
+                   JOptionPane.showMessageDialog(null, "NOMBRE DE USUARIO EXISTENTE");
+                    break;
+                }
+            }
+        }
+        return valid;
+        
     }
 
     public void borrarTxtField() {
