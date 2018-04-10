@@ -3,6 +3,7 @@ package view;
 import model.panaderia;
 import controller.panaderiaController;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,13 +21,10 @@ public class View1 extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         panemco.getLista_panaderia();
-<<<<<<< HEAD:src/view/view1.java
 
-=======
         IconosPanel();
         cargar_datos();
         listarTabla();
->>>>>>> 251ec60ca831e6f77c0edbe3942a51f68a5f8492:src/view/View1.java
     }
     panaderiaController panemco = new panaderiaController();
     int num;
@@ -134,6 +132,11 @@ public class View1 extends javax.swing.JFrame {
         txtNitReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNitRegActionPerformed(evt);
+            }
+        });
+        txtNitReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNitRegKeyTyped(evt);
             }
         });
 
@@ -509,30 +512,20 @@ public class View1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarModActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+
         if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNombreReg.getText(), txtContraUsu.getText())) {
             if (txtNitReg.getText().length() > 10 || txtNitReg.getText().length() < 10) {
                 JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitReg.getText().length() + " digitos.", "ERROR", 0);
-<<<<<<< HEAD:src/view/view1.java
-                
-            } else if (Integer.parseInt(txtNitReg.getText()) <= 0) {
-                JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
-                
-            } else if (txtNitReg.getText().length() == 10 && Integer.parseInt(txtNitReg.getText()) >= 0) {
-                Val_Nit(txtNitReg.getText());
-=======
-//            } else if (Integer.parseInt(txtNitReg.getText()) <= 0) {
-//                JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
-                //hay que validar que los caracteres sean solo numeros
-            } else if (txtNitReg.getText().length() == 10 /*&& Integer.parseInt(txtNitReg.getText()) >= 0*/) {
->>>>>>> 251ec60ca831e6f77c0edbe3942a51f68a5f8492:src/view/View1.java
-                if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText())) {
+
+            } else if (txtNitReg.getText().length() == 10) {
+
+                if (Val_Nit(txtNitReg.getText())) {
                     panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
                     listarTabla();
                     salvar_datos();
                     borrarTxtField();
-                    
                 }
+
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -585,6 +578,7 @@ public class View1 extends javax.swing.JFrame {
                 btnEditarMod.setEnabled(false);
                 chbSelecMod.setSelected(false);
                 borrarTxtField();
+                salvar_datos();
             } else {
                 EditPanMod(false);
                 btnEditarMod.setEnabled(false);
@@ -615,7 +609,7 @@ public class View1 extends javax.swing.JFrame {
         panemco.admintabla(panad_reg_tbl1, panemco.Read(txtBuscarNit.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-<<<<<<< HEAD:src/view/view1.java
+
     private void chbSelecModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chbSelecModMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_chbSelecModMouseClicked
@@ -631,7 +625,7 @@ public class View1 extends javax.swing.JFrame {
     private void txtNitRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNitRegActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNitRegActionPerformed
-=======
+
     private void txtNombreRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreRegActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreRegActionPerformed
@@ -639,7 +633,30 @@ public class View1 extends javax.swing.JFrame {
     private void txtNombreModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreModActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreModActionPerformed
->>>>>>> 251ec60ca831e6f77c0edbe3942a51f68a5f8492:src/view/View1.java
+
+    private void txtNitRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitRegKeyTyped
+        int k = (int) evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        if (k == 241 || k == 209) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        char caracter = evt.getKeyChar();
+
+        // Verificar si la tecla pulsada no es un digito
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+        }
+
+        if (k == 10) {
+            txtNitReg.transferFocus();
+        }
+    }//GEN-LAST:event_txtNitRegKeyTyped
 
     public void EditPanMod(boolean V) {
         btnGuardarMod.setEnabled(V);
@@ -670,13 +687,24 @@ public class View1 extends javax.swing.JFrame {
 
     public Boolean Val_Nit(String nit) {
         boolean valid = true;
-        for (int i = 0; i < panemco.getLista_panaderia().size(); i++) {
-            if (nit.equals(panemco.getLista_panaderia().get(i).getNit())) {
-                valid = false;
-                break;
-                
-            }
+        boolean valid1 = true;
 
+        for (int i = 0; i < nit.length(); i++) {
+            if (!Character.isDigit(nit.charAt(i))) {
+                valid1 = false;
+                valid = false;
+                JOptionPane.showMessageDialog(null, "Caracter no valido: "+nit.charAt(i));                
+                break;
+            }
+        }
+        if (valid1) {            
+            for (int i = 0; i < panemco.getLista_panaderia().size(); i++) {
+                if (nit.equals(panemco.getLista_panaderia().get(i).getNit())) {
+                    valid = false;
+                    JOptionPane.showMessageDialog(null, "NIT Existente");
+                    break;
+                }
+            }
         }
         return valid;
     }
