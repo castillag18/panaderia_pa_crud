@@ -1,7 +1,7 @@
-package controller;
+package Coontroller;
 
-import controller.panaderiaController;
-import model.panaderia;
+import Coontroller.panaderiaController;
+import Moodel.panaderia;
 import java.util.ArrayList;
 
 public class panaderiaController {

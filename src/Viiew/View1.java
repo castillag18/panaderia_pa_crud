@@ -1,7 +1,7 @@
-package view;
+package Viiew;
 
-import model.panaderia;
-import controller.panaderiaController;
+import Moodel.panaderia;
+import Coontroller.panaderiaController;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -704,7 +704,7 @@ public class View1 extends javax.swing.JFrame {
     //accion de salir
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     int finlizar = new JOptionPane().YES_NO_OPTION;
-    int end = JOptionPane.showConfirmDialog(null, "Desea Salir de la Ventana???" , "Exit" , finlizar);
+    int end = JOptionPane.showConfirmDialog(null, "¿Desea Salir de la Ventana?" , "Exit" , finlizar);
         if (end == 0) {
             System.exit(0);
         }
