@@ -9,71 +9,71 @@ import java.util.ArrayList;
 
 public class panaderia implements Serializable{
     
-    private String nombre;
-    private String direccion;
-    private String nit;
-    private String contacto;
-    private String nom_usuario;
-    private String pass_usuario;
+    private String Nombre;
+    private String Direccion;
+    private String Nit;
+    private String Contacto;
+    private String Nom_Usuario;
+    private String Pass_Usuario;
 
-    public panaderia(String nombre, String direccion, String nit, String contacto, String nom_usuario, String pass_usuario) {
-        this.nombre = nombre.toUpperCase();
-        this.direccion = direccion.toUpperCase();
-        this.nit = nit;
-        this.contacto = contacto;
-        this.nom_usuario = nom_usuario;
-        this.pass_usuario = pass_usuario;
+    public panaderia(String Nombre, String Direccion, String Nit, String Contacto, String Nom_Usuario, String Pass_Usuario) {
+        this.Nombre = Nombre.toUpperCase();
+        this.Direccion = Direccion.toUpperCase();
+        this.Nit = Nit;
+        this.Contacto = Contacto;
+        this.Nom_Usuario = Nom_Usuario;
+        this.Pass_Usuario = Pass_Usuario;
     }
 
     public panaderia() {
     }
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
     public String getDireccion() {
-        return direccion;
+        return Direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDireccion(String Direccion) {
+        this.Direccion = Direccion;
     }
 
     public String getNit() {
-        return nit;
+        return Nit;
     }
 
-    public void setNit(String nit) {
-        this.nit = nit;
+    public void setNit(String Nit) {
+        this.Nit = Nit;
     }
 
     public String getContacto() {
-        return contacto;
+        return Contacto;
     }
 
-    public void setContacto(String contacto) {
-        this.contacto = contacto;
+    public void setContacto(String Contacto) {
+        this.Contacto = Contacto;
     }
 
-    public String getNom_usuario() {
-        return nom_usuario;
+    public String getNom_Usuario() {
+        return Nom_Usuario;
     }
 
-    public void setNom_usuario(String nom_usuario) {
-        this.nom_usuario = nom_usuario;
+    public void setNom_Usuario(String Nom_Usuario) {
+        this.Nom_Usuario = Nom_Usuario;
     }
 
-    public String getPass_usuario() {
-        return pass_usuario;
+    public String getPass_Usuario() {
+        return Pass_Usuario;
     }
 
-    public void setPass_usuario(String pass_usuario) {
-        this.pass_usuario = pass_usuario;
+    public void setPass_Usuario(String Pass_Usuario) {
+        this.Pass_Usuario = Pass_Usuario;
     }
     
     

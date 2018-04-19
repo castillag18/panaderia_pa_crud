@@ -74,12 +74,19 @@ public class View1 extends javax.swing.JFrame {
         panad_reg_tbl1 = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         txtBuscarNit = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        Panel_General.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -260,6 +267,7 @@ public class View1 extends javax.swing.JFrame {
 
         btnGuardarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/guardar.png"))); // NOI18N
         btnGuardarMod.setText("Guardar");
+        btnGuardarMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarMod.setEnabled(false);
         btnGuardarMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,6 +298,7 @@ public class View1 extends javax.swing.JFrame {
 
         btnEditarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/editar.png"))); // NOI18N
         btnEditarMod.setText("Editar");
+        btnEditarMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarMod.setEnabled(false);
         btnEditarMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,6 +308,7 @@ public class View1 extends javax.swing.JFrame {
 
         btnEliminarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/eliminar.png"))); // NOI18N
         btnEliminarMod.setText("Eliminar");
+        btnEliminarMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarMod.setEnabled(false);
         btnEliminarMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,6 +318,7 @@ public class View1 extends javax.swing.JFrame {
 
         btnCancelarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cancelar.png"))); // NOI18N
         btnCancelarMod.setText("Cancelar");
+        btnCancelarMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarMod.setEnabled(false);
         btnCancelarMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,6 +358,7 @@ public class View1 extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -464,6 +476,24 @@ public class View1 extends javax.swing.JFrame {
         );
 
         Panel_General.addTab("Modificar", jPanel2);
+
+        jMenu1.setText("Inicio");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cancelar.png"))); // NOI18N
+        jMenuItem1.setText("Salir");
+        jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -671,6 +701,15 @@ public class View1 extends javax.swing.JFrame {
         } 
 
     }//GEN-LAST:event_txtNomreUsuaKeyTyped
+    //accion de salir
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    int finlizar = new JOptionPane().YES_NO_OPTION;
+    int end = JOptionPane.showConfirmDialog(null, "Desea Salir de la Ventana???" , "Exit" , finlizar);
+        if (end == 0) {
+            System.exit(0);
+        }
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public void EditPanMod(boolean V) {
         btnGuardarMod.setEnabled(V);
@@ -736,7 +775,7 @@ public class View1 extends javax.swing.JFrame {
         }
         if (valid1) {
             for (int i = 0; i < panemco.getLista_panaderia().size(); i++) {
-                if (nombreuser.equals(panemco.getLista_panaderia().get(i).getNom_usuario())) {
+                if (nombreuser.equals(panemco.getLista_panaderia().get(i).getNom_Usuario())) {
                    valid = false; 
                    JOptionPane.showMessageDialog(null, "NOMBRE DE USUARIO EXISTENTE");
                     break;
@@ -765,11 +804,11 @@ public class View1 extends javax.swing.JFrame {
 
     public void DatosTxtField() {
         txtContacMod.setText(panemco.read(num).getContacto());
-        txtContraUsuMod.setText(panemco.read(num).getPass_usuario());
+        txtContraUsuMod.setText(panemco.read(num).getPass_Usuario());
         txtDirecMod.setText(panemco.read(num).getDireccion());
         txtNitMod.setText(panemco.read(num).getNit());
         txtNombreMod.setText(panemco.read(num).getNombre());
-        txtNommbUsuMod.setText(panemco.read(num).getNom_usuario());
+        txtNommbUsuMod.setText(panemco.read(num).getNom_Usuario());
     }
 
     public void listarTabla() {
@@ -861,6 +900,10 @@ public class View1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

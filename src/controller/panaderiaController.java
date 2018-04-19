@@ -55,8 +55,8 @@ public class panaderiaController {
             matriz[i][1] = panco.get(i).getDireccion();
             matriz[i][2] = panco.get(i).getNit();
             matriz[i][3] = panco.get(i).getContacto();
-            matriz[i][4] = panco.get(i).getNom_usuario();
-            matriz[i][5] = panco.get(i).getPass_usuario();
+            matriz[i][4] = panco.get(i).getNom_Usuario();
+            matriz[i][5] = panco.get(i).getPass_Usuario();
 
         }       
         
