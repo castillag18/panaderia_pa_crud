@@ -701,6 +701,7 @@ public class View1 extends javax.swing.JFrame {
         } 
 
     }//GEN-LAST:event_txtNomreUsuaKeyTyped
+//hello word
     //accion de salir
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     int finlizar = new JOptionPane().YES_NO_OPTION;
