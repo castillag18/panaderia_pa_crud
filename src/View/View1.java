@@ -94,6 +94,12 @@ public class View1 extends javax.swing.JFrame {
 
         jLabel5.setText("Nombre-Usuario");
 
+        txtNomreUsua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomreUsuaKeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("Contraseña-Usuario");
 
         panad_reg_tbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -134,8 +140,19 @@ public class View1 extends javax.swing.JFrame {
                 txtNitRegActionPerformed(evt);
             }
         });
+        txtNitReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNitRegKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("NIT");
+
+        txtContraUsu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraUsuKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Direccion");
 
@@ -244,6 +261,11 @@ public class View1 extends javax.swing.JFrame {
                 txtNitModActionPerformed(evt);
             }
         });
+        txtNitMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNitModKeyTyped(evt);
+            }
+        });
 
         jLabel10.setText("NIT");
 
@@ -259,10 +281,20 @@ public class View1 extends javax.swing.JFrame {
         jLabel11.setText("Nombre-Usuario");
 
         txtNommbUsuMod.setEnabled(false);
+        txtNommbUsuMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNommbUsuModKeyTyped(evt);
+            }
+        });
 
         jLabel12.setText("Contraseña-Usuario");
 
         txtContraUsuMod.setEnabled(false);
+        txtContraUsuMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraUsuModKeyTyped(evt);
+            }
+        });
 
         chbSelecMod.setText("Seleccionado");
         chbSelecMod.setEnabled(false);
@@ -487,14 +519,16 @@ public class View1 extends javax.swing.JFrame {
     private void btnGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModActionPerformed
         if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
             int OpcGuardPan = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los cambios?");
+
             if (OpcGuardPan == 0) {
+
                 if (txtNitMod.getText().length() > 10 || txtNitMod.getText().length() < 10) {
                     JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitMod.getText().length() + " digitos.", "ERROR", 0);
-//            } else if (Integer.parseInt(txtNitReg.getText()) <= 0) {
-//                JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
-                    //hay que validar que los caracteres sean solo numeros
-                } else if (txtNitReg.getText().length() == 10 /*&& Integer.parseInt(txtNitReg.getText()) >= 0*/) {
+
+                } else if (txtNitMod.getText().length() == 10) {
+
                     if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
+                        System.out.println("pass");
                         panemco.update(num, new Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
                         EditPanMod(false);
                         salvar_datos();
@@ -511,16 +545,11 @@ public class View1 extends javax.swing.JFrame {
         if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNombreReg.getText(), txtContraUsu.getText())) {
             if (txtNitReg.getText().length() > 10 || txtNitReg.getText().length() < 10) {
                 JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitReg.getText().length() + " digitos.", "ERROR", 0);
-
-            } else {
-
-                if (Val_Nit(txtNitReg.getText()) && Val_user(txtNomreUsua.getText())) {
-                    panemco.create(new Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
-                    listarTabla();
-                    salvar_datos();
-                    borrarTxtField();
-                }
-
+            } else if (Val_Nit(txtNitReg.getText()) && Val_user(txtNomreUsua.getText())) {
+                panemco.create(new Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
+                listarTabla();
+                salvar_datos();
+                borrarTxtField();
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -657,18 +686,34 @@ public class View1 extends javax.swing.JFrame {
 
         if (!Character.isLetterOrDigit(evt.getKeyChar())) {
             evt.consume();
-        } 
+        }
 
     }//GEN-LAST:event_txtNomreUsuaKeyTyped
     //accion de salir
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    int finlizar = new JOptionPane().YES_NO_OPTION;
-    int end = JOptionPane.showConfirmDialog(null, "Desea Salir de la Ventana???" , "Exit" , finlizar);
+        int finlizar = new JOptionPane().YES_NO_OPTION;
+        int end = JOptionPane.showConfirmDialog(null, "Desea Salir de la Ventana???", "Exit", finlizar);
         if (end == 0) {
             System.exit(0);
         }
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void txtContraUsuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraUsuKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraUsuKeyTyped
+
+    private void txtNitModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitModKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNitModKeyTyped
+
+    private void txtNommbUsuModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNommbUsuModKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNommbUsuModKeyTyped
+
+    private void txtContraUsuModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraUsuModKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraUsuModKeyTyped
 
     public void EditPanMod(boolean V) {
         btnGuardarMod.setEnabled(V);
@@ -735,14 +780,14 @@ public class View1 extends javax.swing.JFrame {
         if (valid1) {
             for (int i = 0; i < panemco.getLista_Panaderia().size(); i++) {
                 if (nombreuser.equals(panemco.getLista_Panaderia().get(i).getNom_usuario())) {
-                   valid = false; 
-                   JOptionPane.showMessageDialog(null, "NOMBRE DE USUARIO EXISTENTE");
+                    valid = false;
+                    JOptionPane.showMessageDialog(null, "NOMBRE DE USUARIO EXISTENTE");
                     break;
                 }
             }
         }
         return valid;
-        
+
     }
 
     public void borrarTxtField() {
@@ -778,15 +823,15 @@ public class View1 extends javax.swing.JFrame {
 
     public void cargar_datos() {
         File fichero = new File(nameFile);
-        
+
         if (fichero.exists()) {
-            JOptionPane.showMessageDialog(null, "encontrado "+fichero.getAbsolutePath());
+            JOptionPane.showMessageDialog(null, "encontrado " + fichero.getAbsolutePath());
             try {
                 FileInputStream archivo = new FileInputStream(nameFile);
                 ObjectInputStream obj_archivo = new ObjectInputStream(archivo);
                 panemco.setLista_Panaderia((ArrayList<Panaderia>) obj_archivo.readObject());
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nHa ocurrido un error con el archivo");
+                JOptionPane.showMessageDialog(null, e + "\nHa ocurrido un error con el archivo");
             }
         }
 
