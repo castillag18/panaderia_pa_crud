@@ -1,31 +1,30 @@
-package Coontroller;
+package Controller;
 
-import Coontroller.panaderiaController;
-import Moodel.panaderia;
+import Model.Panaderia;
 import java.util.ArrayList;
 
-public class panaderiaController {
+public class PanaderiaController {
 
-    panaderia p1 = new panaderia();
-    ArrayList<panaderia> lista_panaderia = new ArrayList<>();
+    Panaderia p1 = new Panaderia();
+    ArrayList<Panaderia> lista_Panaderia = new ArrayList<>();
 
-    public void create(panaderia p1) {
-        lista_panaderia.add(p1);
+    public void create(Panaderia p1) {
+        lista_Panaderia.add(p1);
     }
 
-    public void update(int index, panaderia p1, javax.swing.JTable panad_reg_tbl, javax.swing.JTable panad_reg_tbl1) {
-        lista_panaderia.set(index, p1);
-        admintabla(panad_reg_tbl, lista_panaderia);
-        admintabla(panad_reg_tbl1, lista_panaderia);
+    public void update(int index, Panaderia p1, javax.swing.JTable panad_reg_tbl, javax.swing.JTable panad_reg_tbl1) {
+        lista_Panaderia.set(index, p1);
+        admintabla(panad_reg_tbl, lista_Panaderia);
+        admintabla(panad_reg_tbl1, lista_Panaderia);
     }
 
-    public panaderia read(int index) {
-        return lista_panaderia.get(index);
+    public Panaderia read(int index) {
+        return lista_Panaderia.get(index);
 
     }
-    public ArrayList<panaderia> Read(String Filter) {
-        ArrayList<panaderia> Get = new ArrayList<>();
-        for (panaderia pan : lista_panaderia) {
+    public ArrayList<Panaderia> Read(String Filter) {
+        ArrayList<Panaderia> Get = new ArrayList<>();
+        for (Panaderia pan : lista_Panaderia) {
             if (pan.getNombre().contains(Filter)) {
                 Get.add(pan);
             }
@@ -35,28 +34,28 @@ public class panaderiaController {
     
 
     public void delete(int index, javax.swing.JTable panad_reg_tbl, javax.swing.JTable panad_reg_tbl1) {
-        lista_panaderia.remove(index);
-        admintabla(panad_reg_tbl,lista_panaderia);
-        admintabla(panad_reg_tbl1,lista_panaderia);
+        lista_Panaderia.remove(index);
+        admintabla(panad_reg_tbl,lista_Panaderia);
+        admintabla(panad_reg_tbl1,lista_Panaderia);
     }
 
-    public ArrayList<panaderia> getLista_panaderia() {
-        return lista_panaderia;
+    public ArrayList<Panaderia> getLista_Panaderia() {
+        return lista_Panaderia;
     }
 
-    public void setLista_panaderia(ArrayList<panaderia> lista_panaderia) {
-        this.lista_panaderia = lista_panaderia;
+    public void setLista_Panaderia(ArrayList<Panaderia> lista_Panaderia) {
+        this.lista_Panaderia = lista_Panaderia;
     }
 
-    public void admintabla(javax.swing.JTable panad_reg_tbl, ArrayList<panaderia> panco) {
+    public void admintabla(javax.swing.JTable panad_reg_tbl, ArrayList<Panaderia> panco) {
         Object[][] matriz = new Object[panco.size()][6];
         for (int i = 0; i < panco.size(); i++) {
             matriz[i][0] = panco.get(i).getNombre();
             matriz[i][1] = panco.get(i).getDireccion();
             matriz[i][2] = panco.get(i).getNit();
             matriz[i][3] = panco.get(i).getContacto();
-            matriz[i][4] = panco.get(i).getNom_Usuario();
-            matriz[i][5] = panco.get(i).getPass_Usuario();
+            matriz[i][4] = panco.get(i).getNom_usuario();
+            matriz[i][5] = panco.get(i).getPass_usuario();
 
         }       
         

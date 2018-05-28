@@ -1,7 +1,7 @@
-package Viiew;
+package View;
 
-import Moodel.panaderia;
-import Coontroller.panaderiaController;
+import Model.Panaderia;
+import Controller.PanaderiaController;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -20,13 +20,13 @@ public class View1 extends javax.swing.JFrame {
     public View1() {
         initComponents();
         setLocationRelativeTo(null);
-        panemco.getLista_panaderia();
+        panemco.getLista_Panaderia();
 
         IconosPanel();
         cargar_datos();
         listarTabla();
     }
-    panaderiaController panemco = new panaderiaController();
+    PanaderiaController panemco = new PanaderiaController();
     int num;
 
     @SuppressWarnings("unchecked")
@@ -74,19 +74,12 @@ public class View1 extends javax.swing.JFrame {
         panad_reg_tbl1 = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         txtBuscarNit = new javax.swing.JTextField();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        Panel_General.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -154,6 +147,12 @@ public class View1 extends javax.swing.JFrame {
         });
 
         jLabel2.setText("NIT");
+
+        txtContraUsu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraUsuKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Direccion");
 
@@ -262,12 +261,16 @@ public class View1 extends javax.swing.JFrame {
                 txtNitModActionPerformed(evt);
             }
         });
+        txtNitMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNitModKeyTyped(evt);
+            }
+        });
 
         jLabel10.setText("NIT");
 
         btnGuardarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/guardar.png"))); // NOI18N
         btnGuardarMod.setText("Guardar");
-        btnGuardarMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarMod.setEnabled(false);
         btnGuardarMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,10 +281,20 @@ public class View1 extends javax.swing.JFrame {
         jLabel11.setText("Nombre-Usuario");
 
         txtNommbUsuMod.setEnabled(false);
+        txtNommbUsuMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNommbUsuModKeyTyped(evt);
+            }
+        });
 
         jLabel12.setText("Contraseña-Usuario");
 
         txtContraUsuMod.setEnabled(false);
+        txtContraUsuMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraUsuModKeyTyped(evt);
+            }
+        });
 
         chbSelecMod.setText("Seleccionado");
         chbSelecMod.setEnabled(false);
@@ -298,7 +311,6 @@ public class View1 extends javax.swing.JFrame {
 
         btnEditarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/editar.png"))); // NOI18N
         btnEditarMod.setText("Editar");
-        btnEditarMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarMod.setEnabled(false);
         btnEditarMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,7 +320,6 @@ public class View1 extends javax.swing.JFrame {
 
         btnEliminarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/eliminar.png"))); // NOI18N
         btnEliminarMod.setText("Eliminar");
-        btnEliminarMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarMod.setEnabled(false);
         btnEliminarMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,7 +329,6 @@ public class View1 extends javax.swing.JFrame {
 
         btnCancelarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cancelar.png"))); // NOI18N
         btnCancelarMod.setText("Cancelar");
-        btnCancelarMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarMod.setEnabled(false);
         btnCancelarMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,7 +368,6 @@ public class View1 extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -477,24 +486,6 @@ public class View1 extends javax.swing.JFrame {
 
         Panel_General.addTab("Modificar", jPanel2);
 
-        jMenu1.setText("Inicio");
-        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cancelar.png"))); // NOI18N
-        jMenuItem1.setText("Salir");
-        jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -528,15 +519,17 @@ public class View1 extends javax.swing.JFrame {
     private void btnGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModActionPerformed
         if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
             int OpcGuardPan = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los cambios?");
+
             if (OpcGuardPan == 0) {
+
                 if (txtNitMod.getText().length() > 10 || txtNitMod.getText().length() < 10) {
                     JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitMod.getText().length() + " digitos.", "ERROR", 0);
-//            } else if (Integer.parseInt(txtNitReg.getText()) <= 0) {
-//                JOptionPane.showMessageDialog(null, "El NIT no puede contener numeros negativos ", "ERROR", 0);
-                    //hay que validar que los caracteres sean solo numeros
-                } else if (txtNitReg.getText().length() == 10 /*&& Integer.parseInt(txtNitReg.getText()) >= 0*/) {
+
+                } else if (txtNitMod.getText().length() == 10) {
+
                     if (Val_Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText())) {
-                        panemco.update(num, new panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
+                        System.out.println("pass");
+                        panemco.update(num, new Panaderia(txtNombreMod.getText(), txtDirecMod.getText(), txtNitMod.getText(), txtContacMod.getText(), txtNommbUsuMod.getText(), txtContraUsuMod.getText()), panad_reg_tbl1, panad_reg_tbl);
                         EditPanMod(false);
                         salvar_datos();
                         chbSelecMod.setSelected(false);
@@ -552,16 +545,11 @@ public class View1 extends javax.swing.JFrame {
         if (Val_Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNombreReg.getText(), txtContraUsu.getText())) {
             if (txtNitReg.getText().length() > 10 || txtNitReg.getText().length() < 10) {
                 JOptionPane.showMessageDialog(null, "El NIT tiene que tener 10 digitos.\nEl NIT ingresado contiene " + txtNitReg.getText().length() + " digitos.", "ERROR", 0);
-
-            } else {
-
-                if (Val_Nit(txtNitReg.getText()) && Val_user(txtNomreUsua.getText())) {
-                    panemco.create(new panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
-                    listarTabla();
-                    salvar_datos();
-                    borrarTxtField();
-                }
-
+            } else if (Val_Nit(txtNitReg.getText()) && Val_user(txtNomreUsua.getText())) {
+                panemco.create(new Panaderia(txtNombreReg.getText(), txtDirecReg.getText(), txtNitReg.getText(), txtContaReg.getText(), txtNomreUsua.getText(), txtContraUsu.getText()));
+                listarTabla();
+                salvar_datos();
+                borrarTxtField();
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -593,7 +581,7 @@ public class View1 extends javax.swing.JFrame {
             btnGuardarMod.setEnabled(false);
             chbSelecMod.setSelected(false);
             EditPanMod(false);
-            JOptionPane.showMessageDialog(null, "No existe panaderia para editar");
+            JOptionPane.showMessageDialog(null, "No existe Panaderia para editar");
         }
 
     }//GEN-LAST:event_btnEditarModActionPerformed
@@ -624,7 +612,7 @@ public class View1 extends javax.swing.JFrame {
             btnEditarMod.setEnabled(false);
             btnEliminarMod.setEnabled(false);
             chbSelecMod.setSelected(false);
-            JOptionPane.showMessageDialog(null, "No existe panaderia para eliminar");
+            JOptionPane.showMessageDialog(null, "No existe Panaderia para eliminar");
         }
 
     }//GEN-LAST:event_btnEliminarModActionPerformed
@@ -698,19 +686,34 @@ public class View1 extends javax.swing.JFrame {
 
         if (!Character.isLetterOrDigit(evt.getKeyChar())) {
             evt.consume();
-        } 
+        }
 
     }//GEN-LAST:event_txtNomreUsuaKeyTyped
-//hello word
     //accion de salir
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    int finlizar = new JOptionPane().YES_NO_OPTION;
-    int end = JOptionPane.showConfirmDialog(null, "¿Desea Salir de la Ventana?" , "Exit" , finlizar);
+        int finlizar = new JOptionPane().YES_NO_OPTION;
+        int end = JOptionPane.showConfirmDialog(null, "Desea Salir de la Ventana???", "Exit", finlizar);
         if (end == 0) {
             System.exit(0);
         }
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void txtContraUsuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraUsuKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraUsuKeyTyped
+
+    private void txtNitModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitModKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNitModKeyTyped
+
+    private void txtNommbUsuModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNommbUsuModKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNommbUsuModKeyTyped
+
+    private void txtContraUsuModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraUsuModKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraUsuModKeyTyped
 
     public void EditPanMod(boolean V) {
         btnGuardarMod.setEnabled(V);
@@ -752,8 +755,8 @@ public class View1 extends javax.swing.JFrame {
             }
         }
         if (valid1) {
-            for (int i = 0; i < panemco.getLista_panaderia().size(); i++) {
-                if (nit.equals(panemco.getLista_panaderia().get(i).getNit())) {
+            for (int i = 0; i < panemco.getLista_Panaderia().size(); i++) {
+                if (nit.equals(panemco.getLista_Panaderia().get(i).getNit())) {
                     valid = false;
                     JOptionPane.showMessageDialog(null, "NIT Existente");
                     break;
@@ -775,16 +778,16 @@ public class View1 extends javax.swing.JFrame {
             }
         }
         if (valid1) {
-            for (int i = 0; i < panemco.getLista_panaderia().size(); i++) {
-                if (nombreuser.equals(panemco.getLista_panaderia().get(i).getNom_Usuario())) {
-                   valid = false; 
-                   JOptionPane.showMessageDialog(null, "NOMBRE DE USUARIO EXISTENTE");
+            for (int i = 0; i < panemco.getLista_Panaderia().size(); i++) {
+                if (nombreuser.equals(panemco.getLista_Panaderia().get(i).getNom_usuario())) {
+                    valid = false;
+                    JOptionPane.showMessageDialog(null, "NOMBRE DE USUARIO EXISTENTE");
                     break;
                 }
             }
         }
         return valid;
-        
+
     }
 
     public void borrarTxtField() {
@@ -805,29 +808,30 @@ public class View1 extends javax.swing.JFrame {
 
     public void DatosTxtField() {
         txtContacMod.setText(panemco.read(num).getContacto());
-        txtContraUsuMod.setText(panemco.read(num).getPass_Usuario());
+        txtContraUsuMod.setText(panemco.read(num).getPass_usuario());
         txtDirecMod.setText(panemco.read(num).getDireccion());
         txtNitMod.setText(panemco.read(num).getNit());
         txtNombreMod.setText(panemco.read(num).getNombre());
-        txtNommbUsuMod.setText(panemco.read(num).getNom_Usuario());
+        txtNommbUsuMod.setText(panemco.read(num).getNom_usuario());
     }
 
     public void listarTabla() {
-        panemco.admintabla(panad_reg_tbl, panemco.getLista_panaderia());
-        panemco.admintabla(panad_reg_tbl1, panemco.getLista_panaderia());
+        panemco.admintabla(panad_reg_tbl, panemco.getLista_Panaderia());
+        panemco.admintabla(panad_reg_tbl1, panemco.getLista_Panaderia());
     }
-    String nameFile = "panaderias_lista1.dat";
+    String nameFile = "..\\pa_crud_Data\\Panaderias_lista1.dat";
 
     public void cargar_datos() {
         File fichero = new File(nameFile);
 
         if (fichero.exists()) {
+            JOptionPane.showMessageDialog(null, "encontrado " + fichero.getAbsolutePath());
             try {
                 FileInputStream archivo = new FileInputStream(nameFile);
                 ObjectInputStream obj_archivo = new ObjectInputStream(archivo);
-                panemco.setLista_panaderia((ArrayList<panaderia>) obj_archivo.readObject());
+                panemco.setLista_Panaderia((ArrayList<Panaderia>) obj_archivo.readObject());
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Ha ocurrido un error con el archivo");
+                JOptionPane.showMessageDialog(null, e + "\nHa ocurrido un error con el archivo");
             }
         }
 
@@ -837,9 +841,9 @@ public class View1 extends javax.swing.JFrame {
         try {
             FileOutputStream archivo = new FileOutputStream(nameFile);
             ObjectOutputStream obj_archivo = new ObjectOutputStream(archivo);
-            obj_archivo.writeObject(panemco.getLista_panaderia());
+            obj_archivo.writeObject(panemco.getLista_Panaderia());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error con el archivo");
+            JOptionPane.showMessageDialog(null, e + "\nHa ocurrido un error con el archivo");
         }
     }
 
@@ -858,16 +862,11 @@ public class View1 extends javax.swing.JFrame {
             javax.swing.UIManager.setLookAndFeel(s);
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(View1.class
-                    .getName()).log(Level.SEVERE, null, ex);
-
+            Logger.getLogger(View1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(View1.class
-                    .getName()).log(Level.SEVERE, null, ex);
-
+            Logger.getLogger(View1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(View1.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(View1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
         }
         //</editor-fold>
@@ -901,10 +900,6 @@ public class View1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
