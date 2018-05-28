@@ -700,19 +700,45 @@ public class View1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void txtContraUsuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraUsuKeyTyped
-        // TODO add your handling code here:
+        if (!Character.isLetterOrDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtContraUsuKeyTyped
 
     private void txtNitModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitModKeyTyped
-        // TODO add your handling code here:
+         int k = (int) evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        if (k == 241 || k == 209) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        char caracter = evt.getKeyChar();
+
+        // Verificar si la tecla pulsada no es un digito
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+        }
+
+        if (k == 10) {
+            txtNitReg.transferFocus();
+        }
     }//GEN-LAST:event_txtNitModKeyTyped
 
     private void txtNommbUsuModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNommbUsuModKeyTyped
-        // TODO add your handling code here:
+        if (!Character.isLetterOrDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNommbUsuModKeyTyped
 
     private void txtContraUsuModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraUsuModKeyTyped
-        // TODO add your handling code here:
+        if (!Character.isLetterOrDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtContraUsuModKeyTyped
 
     public void EditPanMod(boolean V) {
