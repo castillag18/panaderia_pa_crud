@@ -825,7 +825,7 @@ public class View1 extends javax.swing.JFrame {
         File fichero = new File(nameFile);
 
         if (fichero.exists()) {
-            JOptionPane.showMessageDialog(null, "encontrado " + fichero.getAbsolutePath());
+           // JOptionPane.showMessageDialog(null, "encontrado " + fichero.getAbsolutePath());
             try {
                 FileInputStream archivo = new FileInputStream(nameFile);
                 ObjectInputStream obj_archivo = new ObjectInputStream(archivo);
